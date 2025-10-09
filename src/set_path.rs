@@ -1,5 +1,7 @@
-use std::io::Write;
 use std::path::Path;
+#[cfg(not(windows))]
+use std::io::Write;
+#[cfg(not(windows))]
 use std::fs::OpenOptions;
 
 #[cfg(not(windows))]
@@ -60,7 +62,7 @@ pub fn set_path(path: &Path) {
     use winreg::enums::*;
     use winreg::RegKey;
 
-    let new_path = path.to_string_lossy().to_string();
+    let new_path = path.join("bin").to_string_lossy().to_string();
     
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
     let env = match hkcu.open_subkey_with_flags("Environment", KEY_READ | KEY_WRITE) {

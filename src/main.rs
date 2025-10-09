@@ -5,8 +5,10 @@ mod set_path;
 
 use clap::Parser;
 use dirs_next::config_dir;
-use std::io::{self, Write, BufRead};
+use std::io::{self, Write};
 use std::path::Path;
+#[cfg(not(windows))]
+use std::io::{BufRead};
 
 #[derive(Parser)]
 struct Cli {
