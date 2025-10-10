@@ -20,18 +20,22 @@ jobs:
             target: x86_64-unknown-linux-gnu
             artifact_name: target/release/minst
             asset_name: minst-linux-x86_64
+            binary_name: minst-linux-x86_64
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             artifact_name: target/release/minst.exe
             asset_name: minst-windows-x86_64.exe
+            binary_name: minst-windows-x86_64.exe
           - os: macos-latest
             target: x86_64-apple-darwin
             artifact_name: target/release/minst
             asset_name: minst-macos-x86_64
+            binary_name: minst-macos-x86_64
           - os: macos-latest
             target: aarch64-apple-darwin
             artifact_name: target/release/minst
             asset_name: minst-macos-aarch64
+            binary_name: minst-macos-aarch64
 
     steps:
       - name: Checkout code
@@ -86,14 +90,14 @@ jobs:
       - name: Copy files to release directory (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          copy target\${{ matrix.target }}\release\minst.exe release\
+          copy target\${{ matrix.target }}\release\minst.exe release\${{ matrix.binary_name }}
           copy LICENSE release\
         shell: cmd
 
       - name: Copy files to release directory (Unix)
         if: matrix.os != 'windows-latest'
         run: |
-          cp target/${{ matrix.target }}/release/minst release/
+          cp target/${{ matrix.target }}/release/minst release/${{ matrix.binary_name }}
           cp LICENSE release/
 
       - name: Upload artifact
