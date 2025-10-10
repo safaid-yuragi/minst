@@ -8,7 +8,7 @@ BASE_URL="https://github.com/sirasaki-konoha/minst/releases/download/${VERSION}"
 detect_os() {
     case "$(uname -s)" in
         Linux*)     echo "linux" ;;
-        Darwin*)    echo "darwin" ;;
+        Darwin*)    echo "macos" ;;
         MINGW*|MSYS*|CYGWIN*) echo "windows" ;;
         *)          echo "unknown" ;;
     esac
